@@ -106,8 +106,28 @@
 	<body>  
 		  
 	<!-- HOME -->
-		<div data-role="page" id="home" data-theme="b">
+		<div id="home" data-role="page" data-theme="e">
+			<div data-role="header" data-position="fixed">
+				<h3>Home</h3>
+			</div>
+			<div data-role="content" align="center">
+				<div class="ui-grid-b" style="height:95px">
+					<div class="ui-block-a" style="height:100%">
+						<a href="#bmi"><img style="height:100%;" src="img/BMI1.png" is="image"></a>
+					</div>
+					<div class="ui-block-b" style="height:100%"></div>
+					<div class="ui-block-c" style="height:100%"></div>
+				</div>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				
+			</div>
+		</div>
+		
+	<!-- bmi -->
+		<div data-role="page" id="bmi" data-theme="b">
 			<div data-role="header">
+				<a href="#home" data-icon="back">back</a>
 				<h1>BMI Calculator</h1>
 			</div>
 			
@@ -129,9 +149,10 @@
 			</div>
 			
 			<div data-role="footer">
-				<h5>by Tzu</h5>
+				
 			</div>
 		</div>
+	
 		
 	</body>
 
