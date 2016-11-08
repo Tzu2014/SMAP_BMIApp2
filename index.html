@@ -1,5 +1,26 @@
 <!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
@@ -8,78 +29,82 @@
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<title>BMI Calculator</title>
+		<script type="text/javascript">
+			app.initialize();
+		</script>
+		<style>
+			div.ui-input-text { 
+				width: 200px !important 
+			}
+		</style>
+		<script language="javascript">
+			$(function() {
+			//GoButton click
+				$("#BMICompute").click( function()
+					{
+	//						alert('button clicked');
+						var height = $( "#InputHeight" ).val();
+						var weight = $( "#InputWeight" ).val();
+	//						alert(height + ' + ' + weight);
+							
+						var result = weight / (height * height); // compute BMI
+						var result2 = result.toFixed(2); // two decimal places
+	//						alert(result2);
+						
+						var strOutput;
+						if(height=="" || weight==""){
+							strOutput = "Height or weight not filled.";
+							$("#result").html("<strong>" + strOutput + "</strong>");
+						}
+						else if(height >= 10){
+							strOutput = "Height must fill in meter.";
+							$("#result").html("<strong>" + strOutput + "</strong>");
+						}
+						else{
+							// output to interface
+							$("#result").html("<strong>Your height is " + height + "(m), weight is " + weight + "(kg)<br/>BMI = "+result2 + "</strong>");
+							
+							// give user some suggest
+							var suggestOutput;
+							if(result < 18.5){
+								suggestOutput = "Underweight";
+							}
+							else if(18.5 <= result && result <= 24){
+								suggestOutput = "Normal range";
+							}
+							else if(24 <= result && result <= 27){
+								suggestOutput = "Overweight";
+							}
+							else if(27 <= result && result <= 30){
+								suggestOutput = "Mild obesity";
+							}
+							else if(30 <= result && result <= 35){ 
+								suggestOutput = "Moderate obesity";
+							}
+							else{ 
+								suggestOutput = "Severe obesity";
+							}
+							$("#suggest").html("<strong>" + suggestOutput + "</strong>");
+						}
+						
+					}
+				);
+			// resetButton click
+				$("#reCompute").click( function()
+					{
+						$('#InputHeight').val('');
+						$('#InputWeight').val('');
+						
+						$("#result").html("");
+					}
+				);
+			});
+		
+		</script>
 	</head>
-	<style>
-		div.ui-input-text { 
-			width: 200px !important 
-		}
-	</style>
-	<script language="javascript">
-		$(function() {
-		//GoButton click
-			$("#BMICompute").click( function()
-				{
-//						alert('button clicked');
-					var height = $( "#InputHeight" ).val();
-					var weight = $( "#InputWeight" ).val();
-//						alert(height + ' + ' + weight);
-						
-					var result = weight / (height * height); // compute BMI
-					var result2 = result.toFixed(2); // two decimal places
-//						alert(result2);
-					
-					var strOutput;
-					if(height=="" || weight==""){
-						strOutput = "Height or weight not filled.";
-						$("#result").html("<strong>" + strOutput + "</strong>");
-					}
-					else if(height >= 10){
-						strOutput = "Height must fill in meter.";
-						$("#result").html("<strong>" + strOutput + "</strong>");
-					}
-					else{
-						// output to interface
-						$("#result").html("<strong>Your height is " + height + "(m), weight is " + weight + "(kg)<br/>BMI = "+result2 + "</strong>");
-						
-						// give user some suggest
-						var suggestOutput;
-						if(result < 18.5){
-							suggestOutput = "Underweight";
-						}
-						else if(18.5 <= result && result <= 24){
-							suggestOutput = "Normal range";
-						}
-						else if(24 <= result && result <= 27){
-							suggestOutput = "Overweight";
-						}
-						else if(27 <= result && result <= 30){
-							suggestOutput = "Mild obesity";
-						}
-						else if(30 <= result && result <= 35){ 
-							suggestOutput = "Moderate obesity";
-						}
-						else{ 
-							suggestOutput = "Severe obesity";
-						}
-						$("#suggest").html("<strong>" + suggestOutput + "</strong>");
-					}
-					
-				}
-			);
-		// resetButton click
-			$("#reCompute").click( function()
-				{
-					$('#InputHeight').val('');
-					$('#InputWeight').val('');
-					
-					$("#result").html("");
-				}
-			);
-		});
-	
-	</script>
+
 	<body>  
-	  
+		  
 	<!-- HOME -->
 		<div data-role="page" id="home" data-theme="b">
 			<div data-role="header">
@@ -109,4 +134,5 @@
 		</div>
 		
 	</body>
+
 </html>
